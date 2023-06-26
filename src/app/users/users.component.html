@@ -1,0 +1,53 @@
+<!-- Data passed to the mat-table component using the dataSource input.
+Mat-sort header is used to allow each column to be sorted in asc or desc order -->
+<div class="mat-elevation-z8 data-table">
+    <table
+      mat-table
+      class="full-width-table"
+      [dataSource]="dataSource"
+      matSort
+      aria-label="Elements"
+    >
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">Id</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+  
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by amount">Amount</th>
+        <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+      </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">Weight</th>
+            <td mat-cell *matCellDef="let row">{{ row.weight }}</td>
+          </ng-container>
+  
+      <!-- Sticky header added, onRowClick function added -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="onRowClicked(row)"
+      ></tr>
+    </table>
+  
+    <!-- Add a paginator -->
+    <mat-paginator
+      #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]"
+    >
+    </mat-paginator>
+  </div>
